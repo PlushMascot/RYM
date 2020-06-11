@@ -18,7 +18,7 @@ import argparse
 from time import sleep
 import random
 
-HOME = "https://rateyourmusic.com"
+RYM = "https://rateyourmusic.com"
 GECKO = r'C:\\driver.exe'
 
 
@@ -52,9 +52,9 @@ def parse_rym_html(html):
 
         # apparently "usero"- online; "user" - offline
         if stuff.find("a", {"class": "user"}):
-            user = HOME + stuff.find("a", {"class": "user"}).get('href')
+            user = RYM + stuff.find("a", {"class": "user"}).get('href')
         elif stuff.find("a", {"class": "usero"}):
-            user = HOME + stuff.find("a", {"class": "usero"}).get('href')
+            user = RYM + stuff.find("a", {"class": "usero"}).get('href')
         else:
             user = ''
         title = (stuff.find("img").get("title"))
