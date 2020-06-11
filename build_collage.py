@@ -34,5 +34,5 @@ def get_parser():
 if __name__ == '__main__':
     args = get_parser().parse_args()
     username = args.username
-    stars = parse_input_stars(args.stars)
+    stars = args.stars
     collage(username, stars)
