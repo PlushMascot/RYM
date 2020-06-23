@@ -75,7 +75,7 @@ def get_content_from_page(html, stars_lower_bound, stars_upper_bound):
 
 def get_content(album_link, stars_lower_bound, stars_upper_bound) -> [str]:
     content = []
-    browser = webdriver.(executable_path=)
+    browser = webdriver.Firefox(executable_path=GECKO)
     browser.get(album_link)
     ratings = browser.find_element_by_class_name("catalog_section")  # section with ratings
     html = browser.page_source

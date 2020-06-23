@@ -15,9 +15,11 @@ USAGE
 import argparse
 import bs4
 import selenium
+from .build_collage import build_collage
+from .
 
 
-RYM = "https://rateyourmusic.com/~"
+RYM_URL = "https://rateyourmusic.com/~"
 
 
 def get_parser():
@@ -29,6 +31,16 @@ def get_parser():
                         nargs='+',
                         help="stars to pick covers from")
     return parser
+
+
+def collage(usrename, stars):
+    user_url = RYM_URL + username
+    try:
+        stars = list(map(int, stars))
+    except ValueError as e:
+        print(e)
+        print("Something went wrong. Try other arguments.")
+        return
 
 
 if __name__ == '__main__':
