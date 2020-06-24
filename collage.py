@@ -1,9 +1,12 @@
-import argparse
-import bs4
-import selenium
-
-RYM_URL = "https://rateyourmusic.com/~"
+import os
+from PIL import Image
 
 
-def make_collage(pics):
-    pass
+DIR = os.path.dirname(os.path.abspath(__file__))
+IMAGES = os.path.join(DIR, "images")
+
+
+def make_collage(pics, filename):
+    if not pics:
+        print("I couldnt get any pictures:(")
+        return

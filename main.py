@@ -12,14 +12,8 @@ USAGE
     python build_collage.py User -s 5.0
 """
 
-import argparse
-import bs4
-import selenium
 from .build_collage import build_collage
-from .
-
-
-RYM_URL = "https://rateyourmusic.com/~"
+from .scarping import get_images
 
 
 def get_parser():
@@ -30,21 +24,21 @@ def get_parser():
     parser.add_argument("stars",
                         nargs='+',
                         help="stars to pick covers from")
+    parser.add_argument("filename",
+                        help="File will be saved in the project directory\n\
+                        example: my_collage")
     return parser
-
-
-def collage(usrename, stars):
-    user_url = RYM_URL + username
-    try:
-        stars = list(map(int, stars))
-    except ValueError as e:
-        print(e)
-        print("Something went wrong. Try other arguments.")
-        return
 
 
 if __name__ == '__main__':
     args = get_parser().parse_args()
     username = args.username
     stars = args.stars
-    collage(username, stars)
+    try:
+         stars = list(map(float, stars))
+     except ValueError as e:
+         print(e)
+         print("Something went wrong. Try other arguments.")
+         return
+    pics = get_images(username, stars)
+    build_collage(pics, filename)

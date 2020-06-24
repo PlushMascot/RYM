@@ -90,9 +90,10 @@ def get_content(album_link, stars_lower_bound, stars_upper_bound) -> [str]:
         elems = ratings.find_elements_by_class_name("navlinknum")
         last_page = int(elems[-1].text)
 
-        # iterate over all pages in rating_section starting with second; first is already parsed
-        # as sooon as we click on the next page and get content, we need to get new list of pages
-        # have to wait a bit here to dodge the ban (:
+        # iterate over all pages in rating_section starting with second;
+        # first page is already parsed
+        # on the next page: 1)get content; 2)get new list of pages
+        # 3) wait a bit here to dodge the banhammer
         for page_num in range(2, last_page+1):
             elems = ratings.find_elements_by_class_name("navlinknum")
             for el in elems:
