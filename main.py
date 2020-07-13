@@ -12,8 +12,8 @@ USAGE
     python build_collage.py User -s 5.0
 """
 
-from .build_collage import build_collage
-from .scarping import get_images
+from .make_collage import make_collage
+from .scraping import get_raw_data, get_images
 
 
 def get_parser():
@@ -27,6 +27,12 @@ def get_parser():
     parser.add_argument("filename",
                         help="File will be saved in the project directory\n\
                         example: my_collage")
+    parser.add_argument("-r", dest="rows", default=4,
+                        help="Number of rows\n\
+                        example: -r 5 (default number is 4"")
+    parser.add_argument("-c", dest="cols", default=4,
+                        help="Number of collumns\n\
+                        example: -c 5 (default number is 4")
     return parser
 
 
@@ -34,11 +40,17 @@ if __name__ == '__main__':
     args = get_parser().parse_args()
     username = args.username
     stars = args.stars
+    output = args.filename
     try:
-         stars = list(map(float, stars))
+         n_rows, n_cols = map(int, [args.rows, args.cols])
      except ValueError as e:
          print(e)
-         print("Something went wrong. Try other arguments.")
+         print("Number of rows/columns is invalid")
          return
-    pics = get_images(username, stars)
-    build_collage(pics, filename)
+
+    raw_data = get_raw_data(username, stars)
+    pics = get_images(raw_data, n_rows*n_cols)
+    if pics:
+        make_collage(pics, output, n_rows, n_cols)
+    else:
+        print("No albums with that rating(s)")

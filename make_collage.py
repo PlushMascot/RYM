@@ -6,7 +6,6 @@ DIR = os.path.dirname(os.path.abspath(__file__))
 IMAGES = os.path.join(DIR, "images")
 
 
-def make_collage(pics, filename):
+def make_collage(pics, output, n_rows, n_cols):
     if not pics:
-        print("I couldnt get any pictures:(")
-        return
+        return 0
